@@ -1,0 +1,52 @@
+doctype html
+html
+  include head.pug
+head 
+    nav(class="navbar navbar-default")
+        div(class="container-fluid")
+        p(class="navbar-text")
+            a(href="/") Nightlife App 
+        a(href="/auth/facebook")
+            button(type="button" class="btn btn-default navbar-btn") #{locals.login} 
+                image(src="/public/img/FB-f-Logo__blue_29.png")
+body
+    div(class="main list-group")
+        ul(class="nav nav-pills nav-stacked" id="bars")
+            each place in places
+                li(role="presentation" class="list-group-item")
+                        div(class="bar" id="image")
+                            a(href=place.url)
+                                img(src=place.image_url class="bars")
+                        div(class="bar" id="info")    
+                            h4(id="name")= place.name 
+                            p(id="price")= place.price
+                            -for (var i=0; i<parseInt(place.rating); i++)
+                                i(class="fa fa-star" aria-hidden="true")
+                            -if (parseInt(place.rating)%2!==0)
+                                i(class="fa fa-star-half-o" aria-hidden="true")
+                            -for (var i=0; i<place.address.length; i++) 
+                                p(class="address")=place.address[i]
+                        span(class="badge") 0
+                        button(type="button" class="btn btn-default rsvp" style=locals.button) I'm going!
+script. 
+    var rsvp = document.getElementsByClassName("rsvp");
+    for (var i = 0; i<rsvp.length; i++) {
+    rsvp[i].onclick=function() {
+        var count = parseInt(event.target.previousSibling.innerHTML);
+        if (event.target.innerHTML==="I'm going!") {
+            event.target.innerHTML= "Maybe not...";
+            count+=1;
+            event.target.previousSibling.innerHTML=count;
+        }
+        else if (event.target.innerHTML==="Maybe not...") {
+            event.target.innerHTML="I'm going!";
+            count-=1;
+            event.target.previousSibling.innerHTML=count;
+        }
+    }
+    };
+    
+
+                        
+
+    

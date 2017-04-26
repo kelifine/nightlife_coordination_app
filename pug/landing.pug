@@ -1,0 +1,16 @@
+doctype html
+html
+  include head.pug
+body
+    div(class="greeting text-center")
+        h1(class="landing") Going out tonight? 
+        h3(class="landing") Find the top bars in your area then login to tell everyone where you're going tonight! 
+        i(class="fa fa-beer fa-5x welcome" aria-hidden="true")
+        i(class="fa fa-users fa-5x welcome" aria-hidden="true")
+        i(class="fa fa-check-square-o fa-5x welcome" aria-hidden="true")
+    div(class="barfinder")
+        form(class="form-inline text-center" method="post" action="/findbars")
+            div(class="form-group")
+                label(class="sr-only" for="location") Location
+                input(type="text" class="form-control" id="location" placeholder="Type in your location to find bars near you!" name="location")
+            button(type="submit" class="btn btn-default") Find bars!
