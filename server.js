@@ -7,10 +7,9 @@ var passport = require('passport');
 var session = require('express-session');
 
 var app = express();
-require('dotenv').load();
 require('./app/config/passport')(passport);
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGOLAB_URL);
 mongoose.Promise = global.Promise;
 
 app.use('/public', express.static(process.cwd() + '/public'));
